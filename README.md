@@ -35,7 +35,7 @@ The RFILES directory contains all the scripts and data necessary to run the anal
 
 The most important functions are **Project_global_sealevel** for MCMC calibration and projections, **San_francisco_tides** for Generalized Extreme Value analysis of the San Francisco hourly tide gauge data, and **SLR_StormSurge_100yrFlood** for generating potential future flood frequency curves based on storm surge and sea-level rise.
 
-To run the R analysis, simply open a terminal and run **Project_global_sealevel** (~30 mins.). Then source **San_francisco_tides** (~5 mins), **SLR_StormSurge_100yrFlood** (~8 hrs), and **PlotRuckertetal_SanFranStormSurSLR** (~1hr) to generate plots. (Specific details can be found in the README.txt file.
+To run the R analysis, simply open a terminal and run **Project_global_sealevel** (~30 mins.). Then source **San_francisco_tides** (~5 mins), **SLR_StormSurge_100yrFlood** (~8 hrs), and **PlotRuckertetal_SanFranStormSurSLR** (~1hr) to generate plots. (Specific details can be found in the README.txt file).
 
 To run the GIS analysis, follow the instructions provided in the Flood_Analysis_tutorial.pdf files.
 
