@@ -60,11 +60,11 @@ Required software:
 
  =============================================================================
 | Short description of GIS folders:
-|  1. ROK_analysis: Contains all of the shapefiles and rasters used for flood 
-|     risk analysis. 
+|  1. Analysis: Contains most if not all of the shapefiles used for flood 
+|     risk analysis. NOTE: Rasters and DEMs not included because of size.
 |     The .mxd files are ArcMap files set to create the figures in the paper. 
-|  2. Tutorial: Contains a general tutorial on how to analyze flood Risk using 
-|     Digital Elevation models.
+|  2. Tutorial: Contains a step by step tutorial on how flood risk was analzyed
+|      using Digital Elevation models.
 |     The data needed for this tutorial are included in the folder.
  =============================================================================
 
