@@ -1,24 +1,39 @@
 #######################################################################
 #
-# inv_sf.r    15 Nov 2015
+# inv_sf.r    09 Dec 2015
 #
 # Author: Gregory Garner (ggg121@psu.edu)
 #
-# Function that estimates the inverse of a survival function of a given vector of data
-# and a value. It will interpolate the probability of a value.
+# Function that calculates the inverse of a survival function
 #
 # To use this function, simply source this file:
 #   source("inv_sf.r")
 #
+# Version History:
+#   1.0 - 09 Dec 2015 - Initial coding (G.G.)
+#
+# Function Name: inv.sf
+# Parameters:
+#   x - vector of data
+#   val - value you're trying to get an SF value for
+#
+# Example:
+# inv.sf(data[ ,1], 3.25)
+#   - Will return the SF value for 3.25 given the data in data[ ,1]. You can
+#     use this function in an apply() function to get the values over the
+#     entirematrix of data.
+# apply(data, 2, inv.sf, val = 3.25)
+#
+# NOTE: That the function returns "NA" if the value cannot be calculated
+# (i.e., val is outside of the range of x).  Also, if val does not have
+# an exact match in x, the SF value is linearly interpolated between the
+# two closest points.
+#
 # THIS CODE IS PROVIDED AS-IS WITH NO WARRANTY (NEITHER EXPLICIT
-# NOT IMPLICIT).  I SHARE THIS CODE IN HOPES THAT IT IS USEFUL,
+# NOR IMPLICIT).  I SHARE THIS CODE IN HOPES THAT IT IS USEFUL,
 # BUT I AM NOT LIABLE FOR THE BEHAVIOR OF THIS CODE IN YOUR OWN
 # APPLICATION.  YOU ARE FREE TO SHARE THIS CODE SO LONG AS THE
 # AUTHOR(S) AND VERSION HISTORY REMAIN INTACT.
-#
-# Function Name: inv.sf
-#
-# Note that the value must be within the range of x values otherwise NA is returned.
 #
 #######################################################################
 
