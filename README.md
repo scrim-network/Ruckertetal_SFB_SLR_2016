@@ -15,7 +15,7 @@ This R code and the [GIS tutorial](https://download.scrim.psu.edu/Ruckert_etal_S
 5. Produce figures from the paper 
 
 
-Additionally, a "shiny" application (https://clima.shinyapps.io/ROK\_SFB\_2016/) was developed by Kelsey Ruckert to showcase the results in Ruckert et al. (in review). The objective of the Shiny app is to provide an interactive tutorial illustrating how changes in sea level affect flooding events and their associated probability of occurrence, especially over time.
+Additionally, a "shiny" application [(https://clima.shinyapps.io/ROK\_SFB\_2016/)](https://clima.shinyapps.io/ROK_SFB_2016/) was developed by Kelsey Ruckert to showcase the results in Ruckert et al. (in review). The objective of the Shiny app is to provide an interactive tutorial illustrating how changes in sea level affect flooding events and their associated probability of occurrence, especially over time.
 
 ### Citation:
 >Ruckert, KL, Oddo, PC, and Keller, K. Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, *in Review*.
@@ -53,7 +53,7 @@ library(mcmc)
 * `Plot_Ruckertetal_SFB.R`, `Plot_distributions.R`, & `Plot_hypospectic.R`: Generates figures in the paper
 
 ### ArcGIS
-The GIS analysis is conducted using ArcGIS ArcMAP (tested under version 10.3.1 with the Spatial Analyst extension). **All files needed to conduct the analysis can be found at: https://download.scrim.psu.edu/Ruckert\_etal\_San\_Francisco/.**
+The GIS analysis is conducted using ArcGIS ArcMAP (tested under version 10.3.1 with the Spatial Analyst extension). **All files needed to conduct the analysis can be found at: [https://download.scrim.psu.edu/Ruckert\_etal\_San\_Francisco/](https://download.scrim.psu.edu/Ruckert_etal_San_Francisco/).**
 
 ##### Main contents
 * `Flood_map_documentation.pdf`: Instructions on creating a flood map for the San Francisco Bay area
@@ -64,7 +64,7 @@ The GIS analysis is conducted using ArcGIS ArcMAP (tested under version 10.3.1 w
 * Download the files included
 * Make a `Figures`, `Trace`, and `Workspace` directory for R output
 * Open and source the `.R` files in R or RStudio in the following order; 1) `San_francisco_tides.R`, 2) `Project_global_sealevel.R`, 3) `Converge_test_MCMC_SLR.R`, 4) `SLR_StormSurge_100yrFlood.R`, 5) `Distribution_test.R`, 6) `Plot_Ruckertetal_SFB.R`, 7) `Plot_distributions.R`, & 8) `Plot_hypospectic.R`.
-* Download the GIS files from: https://download.scrim.psu.edu/Ruckert\_etal\_San\_Francisco/
+* Download the GIS files from: [https://download.scrim.psu.edu/Ruckert\_etal\_San\_Francisco/](https://download.scrim.psu.edu/Ruckert_etal_San_Francisco/)
 * Follow the ArcGIS instructions in `Flood_map_documentation.pdf` and use the `Python.py` script for additional help
 
 ## Contact
