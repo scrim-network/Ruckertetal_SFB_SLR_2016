@@ -1,45 +1,77 @@
-#Current and future flood risk analysis of the San Francisco Bay area from Ruckert et al. (in prep)
+# Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay
 
-README file last updated by Kelsey Ruckert, klr324-at-psu-dot-edu, Fri July 8 12:19:51 EST 2016
+## Overview
+This code uses "*a case study to quantify and illustrate how neglecting sea-level rise uncertainties can bias risk projections.*" The case study focuses on the future 1-in-100 year storm surge in the year 2100 in the San Francisco Bay area. Accounting for the uncertainties associated with future sea-level rise is important because it "*can have considerable impacts on the design of flood risk management strategies.*"
 
-## Citation
-
-This code is intended to accompany the results of 
-
->Ruckert, KL, Oddo, PC, and Keller, K. Accounting for sea-level rise uncertainty increases flood risk area: An example from San Francisco Bay, (in prep).
-
-### Other credits:
->Ruckert, KL, Guan, Y, Forest, FE, and Keller, K. Improving the statistical method can raise the upper tail of sea-level projections, (in prep.)
-
-##Overview
-
-This code requires R and ArcGIS ArcMAP with the following libraries:
-- coda
-- mcmc
-- RColorBrewer
-- DEoptim
-- compiler
-
-This R code and the GIS tutorial is intended to help users who wish to work with the storm surge and sea-level projections or hindcasts or flood risk analysis in greater detail than provided in the text. Key functionality of these scripts include:
+This R code and the GIS tutorial is intended to help users who wish to work with the storm surge and sea-level projections/ hindcasts in greater detail than provided in the text. Key functionality of these scripts include:
 
 1. Project changes in sea level from 1880 to 2300 with associated probabilities
 2. Estimate the current 100-year storm surge for the San Francisco Bay area
-3. Estimate potential future storm surge from 3 methods of accounting for sea level change:
-  1. no change in sea-level
-  2. adding the mean sea-level rise estimate
-  3. accounting for the sea-level rise probability distribution
-4. Determine potential future flood risk in the San Francisco Bay area
+3. Estimate potential future storm surge in 2100 from 3 methods of accounting for sea level change:
+  * no change in sea-level
+  * adding the mean sea-level rise estimate
+  * accounting for sea-level uncertainty (i.e., the entire distribution)
+4. Determine the area at risk to potential future coastal flooding in the San Francisco Bay area
 5. Produce figures from the paper
 
-The RFILES directory contains all the scripts and data necessary to run the analysis along with a README file. The prerun analysis output used to generate the Ruckert et al. (in prep.) figures exceeds 100 MB. For access to the prerun analysis please contact the corresponding author. _(Note that the folder directory MUST be in the same format as when downloaded otherwise the scripts will not locate the files/scripts needed to run. Additionally, create a 'Workspace' folder that is empty before running the analysis. Output will be saved to this folder.)_
 
-The most important functions are **Project_global_sealevel** for MCMC calibration and projections, **San_francisco_tides** for Generalized Extreme Value analysis of the San Francisco hourly tide gauge data, and **SLR_StormSurge_100yrFlood** for generating potential future flood frequency curves based on storm surge and sea-level rise.
+Additionally, a "shiny" application [link coming soon] was developed by Kelsey Ruckert to showcase the results in Ruckert et al. (in review). The objective of the Shiny app is to provide an interactive tutorial illustrating how changes in sea level affect flooding events and their associated probability of occurence, especially over time.
 
-To run the R analysis, simply open a terminal and run **Project_global_sealevel** (~30 mins.). Then source **San_francisco_tides** (~5 mins), **SLR_StormSurge_100yrFlood** (~8 hrs), and **PlotRuckertetal_SanFranStormSurSLR** (~1hr) to generate plots. (Specific details can be found in the README.txt file).
+### Citation:
+>Ruckert, KL, Oddo, PC, and Keller, K. Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, *in Review*.
 
-To run the GIS analysis, follow the instructions provided in the Flood_Analysis_tutorial.pdf files.
+## Requirements
+### R
+The scripts are written in R (tested under R v3.2.1;  https://www.r-project.org/) using the following packages:
+>mcmc  
+coda  
+RColorBrewer  
+DEoptim  
+compiler  
+extRemes  
+fExtremes  
+ismev  
+lubridate  
+zoo  
+shiny  
+shinyRGL  
+plotrix  
+ggvis  
 
-##Contact
-Kelsey Ruckert: <klr324@psu.edu>  
-Corresponding author: Klaus Keller at <klaus@psu.edu>
+You can install and open the packages in R as shown in the example below, which installs the mcmc package.
+
+```R
+install.packages("mcmc")
+library(mcmc)
+```
+##### Main contents
+* `San_francisco_tides.R`: Runs GEV analysis on tide gauge data from San Francisco
+* `Project_global_sealevel.R`: Calibrates and projects global sea-level rise using the Rahmstorf (2007) model and Markov chain Monte Carlo calibration
+* `Converge_test_MCMC_SLR.R`: Tests MCMC convergence using the potential scale reduction factor
+* `SLR_StormSurge_100yrFlood.R`: Estimates potential future 100-yr flood for the San Francisco Bay area based on the current 100-yr storm surge plus various SLR projections in the year 2100
+* `Distribution_test.R`: Estimates potential future 100-yr flood for the San Francisco Bay area based on the current 100-yr storm surge plus various distribution shapes of SLR projections in the year 2100
+* `Plot_Ruckertetal_SFB.R`, `Plot_distributions.R`, & `Plot_hypospectic.R`: Generates figures in the paper
+
+### ArcGIS
+The GIS analysis is conducted using ArcGIS ArcMAP (tested under version 10.3.1 with the Spatial Analyst extension). **All files needed to conduct the analysis can be found at: [link coming soon].**
+
+##### Main contents
+* `Flood_map_documentation.pdf`: Instructions on creating a flood map for the San Francisco Bay area
+* `Python.py`: Python codes that accompany the instructions to be used in ArcGIS ArcMAP
+
+
+## Instructions
+* Download the files included
+* Make a `Figures`, `Trace`, and `Workspace` directory for R output
+* Open and source the `.R` files in R or RStudio in the following order; 1) `San_francisco_tides.R`, 2) `Project_global_sealevel.R`, 3) `Converge_test_MCMC_SLR.R`, 4) `SLR_StormSurge_100yrFlood.R`, 5) `Distribution_test.R`, 6) `Plot_Ruckertetal_SFB.R`, 7) `Plot_distributions.R`, & 8) `Plot_hypospectic.R`.
+* Download the GIS files from: [link coming soon]
+* Follow the ArcGIS instructions in `Flood_map_documentation.pdf` and use the `Python.py` script for additional help
+
+## Contact
+Kelsey Ruckert  
+E-mail: <klr324@psu.edu>
+
+Corresponding author:  
+Klaus Keller  
+E-mail: <klaus@psu.edu>
  
