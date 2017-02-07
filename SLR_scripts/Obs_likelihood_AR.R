@@ -5,7 +5,7 @@
 #  - Edited to run SLR model by: Kelsey Ruckert (klr324@psu.edu)
 #
 #  -This function computes the log likelihood for a zero-mean AR1 process from
-#       sea-level rise observations as described in  Ruckert et al. (in prep).
+#       sea-level rise observations as described in  Ruckert et al. (2016; 2017).
 #       For further description and references, please read the paper
 #       and the appendix.
 #
@@ -13,7 +13,7 @@
 #       can be found in the R package in review "VAR1"
 #
 # THIS CODE IS PROVIDED AS-IS WITH NO WARRANTY (NEITHER EXPLICIT
-# NOT IMPLICIT).  I SHARE THIS CODE IN HOPES THAT IT IS USEFUL,
+# NOR IMPLICIT).  I SHARE THIS CODE IN HOPES THAT IT IS USEFUL,
 # BUT I AM NOT LIABLE FOR THE BEHAVIOR OF THIS CODE IN YOUR OWN
 # APPLICATION.  YOU ARE FREE TO SHARE THIS CODE SO LONG AS THE
 # AUTHOR(S) AND VERSION HISTORY REMAIN INTACT.
@@ -25,7 +25,12 @@
 
 # source in the function that finds the log likelihood and the lag-1
 #   autocorrelation coefficient
+# Use either the approximation method. In the case of small errors the approximation method produces minor differences. For the analysis we use the approximation method.
 source("SLR_scripts/AR.R")
+
+#- OR the less stable large matrix method. NOTE: This method takes significantly longer
+#  and is not used in this analysis.
+#source("Scripts/logl.ar1hetero.r")
 
 log.lik = function(p) # model.p is the dimension of model parameters 
 { 
