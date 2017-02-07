@@ -8,17 +8,26 @@
 # klr324@psu.edu
 # Code written Nov. 2015
 #
-# THIS CODE IS PROVIDED AS-IS WITH NO WARRANTY (NEITHER EXPLICIT
-# NOR IMPLICIT).  I SHARE THIS CODE IN HOPES THAT IT IS USEFUL,
-# BUT I AM NOT LIABLE FOR THE BEHAVIOR OF THIS CODE IN YOUR OWN
-# APPLICATION.  YOU ARE FREE TO SHARE THIS CODE SO LONG AS THE
-# AUTHOR(S) AND VERSION HISTORY REMAIN INTACT.
+##==============================================================================
+## Copyright 2015 Perry Oddo, Kelsey Ruckert
+## This file is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## This file is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with this file.  If not, see <http://www.gnu.org/licenses/>.
+##==============================================================================
 #
 ###################################
 # GEV Analysis of tide gauge data from
 # San Francisco, CA
 #################################### 
-
 # Clear environment and graphics
 rm(list = ls())
 graphics.off()
@@ -35,6 +44,7 @@ library(ismev)
 library(lubridate)
 library(zoo)
 
+#------------------------------
 # Read in tide gauge data
 data = read.table("Data/SFB_TG_1914-2014.txt", header = TRUE, sep = '\t')
 data$sl <- data$sl * 100
@@ -76,8 +86,10 @@ year.res.max <- aggregate(year.res.zoo, as.year, max)
 # Save object for MCMC analysis
 MCMC_coredata <- coredata(year.res.max)
 save(MCMC_coredata, file = "Workspace/coredata.RData")
+# save(year.res.max, file = "ShinyApp/Data/year_res_max.RData")
 
-### Fit GEV of residuals ###
+#------------------------------
+### Fit GEV of residuals: Equation (5).
 year.res.max.fit <- fevd(coredata(year.res.max))   # extRemes package
 year.res.max.fit2 <- gevFit(coredata(year.res.max))   # fExtremes package
 year.res.max.fit3 <- gev.fit(coredata(year.res.max), show = FALSE)   # ismev package
@@ -85,13 +97,14 @@ year.res.max.fit3 <- gev.fit(coredata(year.res.max), show = FALSE)   # ismev pac
 # Print GEV estimates
 print(year.res.max.fit2@fit$par.ests)
 #xi         mu       beta 
-#0.22964812 1.30177669 0.06732941  
+#-0.1145612 130.2788402   7.9710090  
 
 # Determine return levels using maximum likelihood estimate (95% confidence interval):
-year.return <- return.level(year.res.max.fit, return.period = 100000, do.ci = TRUE)
+year.return <- return.level(year.res.max.fit, return.period = c(2:10000), do.ci = TRUE)
 
-# Print estimates of 2:100000-year flood, with confidence intervals
+# Print estimates of 2:10000-year flood, with confidence intervals
 print(year.return)
 
+#------------------------------
 save.image(file = "Workspace/SFB_stormSurge.RData")
 ################################## END #############################################
