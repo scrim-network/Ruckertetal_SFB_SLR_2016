@@ -1,5 +1,10 @@
 # Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay
 
+README file last updated by Kelsey Ruckert, klr324-at-psu-dot-edu, Tue Feb 7 2017
+
+## Citation
+>Ruckert, KL, Oddo, PC, and Keller, K. Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, *in Review*.
+
 ## Overview
 This code uses "*a case study to quantify and illustrate how neglecting sea-level rise uncertainties can bias risk projections.*" The case study focuses on the future 1-in-100 year storm surge in the year 2100 in the San Francisco Bay area. Accounting for the uncertainties associated with future sea-level rise is important because it "*can have considerable impacts on the design of flood risk management strategies.*"
 
@@ -16,9 +21,6 @@ This R code and the [GIS tutorial](https://download.scrim.psu.edu/Ruckert_etal_S
 
 
 Additionally, a "shiny" application [(https://clima.shinyapps.io/ROK\_SFB\_2016/)](https://clima.shinyapps.io/ROK_SFB_2016/) was developed by Kelsey Ruckert to showcase the results in Ruckert et al. (in review). The objective of the Shiny app is to provide an interactive tutorial illustrating how changes in sea level affect flooding events and their associated probability of occurrence, especially over time.
-
-### Citation:
->Ruckert, KL, Oddo, PC, and Keller, K. Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, *in Review*.
 
 ## Requirements
 ### R
