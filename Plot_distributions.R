@@ -76,7 +76,7 @@ single_panel_height = 4
 ############################# Supp. Figure #7 ##################################
 # Test different distribution shapes
 
-png(file="Figures/S7_Fig_norm_a.tif", family="Times", units="in", width=text_column_width, height=single_panel_height*2, pointsize=11, res=300)
+png(file="Figures/S4_Fig.tif", family="Times", units="in", width=text_column_width, height=single_panel_height*2, pointsize=11, res=300)
 par(mfrow=c(2,1), mgp=c(1.5,.5,0),mar=c(4, 3, 1, 2.5))
 
 #pdf2100DamsRes <- density(proj2100DamsRes)
@@ -125,15 +125,16 @@ lines(norm.num.range, norm.average.uncertainty.probs, type="l", col="powderblue"
 #points(fit_q_year[year100prob]/100, new.ssurge.prob, pch=21, bg=myheatcolors[3])
 #points(num.range[max.returnL+1], average.uncertainty.probs[max.returnL+1], pch=21, bg=myheatcolors[9])
 
-legend("topright",
-c("Observations", "Current storm surge", "Storm surge + this study empirical pdf",
-"Storm surge + normal dist. approximation", "Storm surge + log normal dist. approximation", "Storm surge + pareto dist. approximation"),
-col = c("black", myheatcolors[3], myheatcolors[9], "powderblue", "steelblue2", "royalblue4"),
-pch = c(21, NA, NA, NA, NA, NA),
-pt.bg = c("black", NA, NA, NA, NA, NA),
-lty = c(NA, 1, 1, 1, 1, 1), #y.intersp=c(0.9,0.9,0.9,0.9,1,1,1.1),
-lwd = c(NA, 1.5, 1.5, 1.5, 1.5, 1.5),
-cex=0.8)
+legend("topright", c("Observations", "Baseline storm surge", "Flood height accounting for\nthis study empirical pdf",
+                     "Flood height accounting for\nnormal dist. approximation", 
+                     "Flood height accounting for\nlog normal dist. approximation", 
+                     "Flood height accounting for\npareto dist. approximation"),
+       col = c("black", myheatcolors[3], myheatcolors[9], "powderblue", "steelblue2", "royalblue4"),
+       pch = c(21, NA, NA, NA, NA, NA),
+       pt.bg = c("black", NA, NA, NA, NA, NA),
+       lty = c(NA, 1, 1, 1, 1, 1), y.intersp=c(0.9,0.9,0.9,1,1.1,1.2),
+       lwd = c(NA, 1.5, 1.5, 1.5, 1.5, 1.5),
+       cex=0.8)
 
 put.fig.letter("b.",font=2, cex=1)
 
