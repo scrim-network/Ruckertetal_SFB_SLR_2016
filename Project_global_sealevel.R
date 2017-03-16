@@ -1,7 +1,7 @@
 ########################################################################################
 #
 #  -file = "Project_global_sealevel.R"   Code written April 2014, updated Dec 2015
-#  - Author: Kelsey Ruckert (klr324@psu.edu)
+#  -Author: Kelsey Ruckert (klr324@psu.edu)
 #
 #  -This program loads in temperature and global sea-level data for use in 
 #       projecting a global sea-level model and Markov chain Monte Carlo calibration described
@@ -69,13 +69,13 @@ data = read.csv("Data/NOAA_IPCC_RCPtempsscenarios.csv")
 ## Historical time frame and temperatures from NOAA
 # hist.temp, historical global mean temperatures from 1880 to 2300 in C
 # alltime, time in years from 1880 to 2300 (1yr increments)
-hist.temp = data[1:122,2] 
-alltime = data[,1] 
+hist.temp = data[1:122,2]
+alltime = data[,1]
 
 ## IPCC temperature scenarios added to NOAA temperatures from 1880-2100
 # scenario_time, , time in years from 1880 to 2100 (5yr increments)
 # max to b2, merged historical + IPCC temperature scenarios from 1880-2100 in C (5yr increments)
-scenario_time = data[1:45,5] 
+scenario_time = data[1:45,5]
 max = data[1:45,6]  #6.195 C in 2100
 min = data[1:45,7]  #1.773 C in 2100
 a1fi = data[1:45,8] #4.892 C in 2100
@@ -101,16 +101,16 @@ slr = church[11:132, 2]/10 #mm to cm
 err.obs = church[11:132,3]/10 #mm to cm
 
 ## To match Heberger et al. (2009), sea-level values are set in reference to the 2000 mean SLR value
-SLR2000 = slr[120]  # 120 equals the year 2000 
+SLR2000 = slr[120]  # 120 equals the year 2000
 slr = slr - SLR2000
 
 # Set the observational errors by adding and subtracting the errors to the sea-level values
-err_pos = slr+err.obs
-err_neg = slr-err.obs
+err_pos=slr+err.obs
+err_neg=slr-err.obs
 
 # Set the hindcast and projection length
-hindcast_length = 122 # there are 122 years from 1880 to 2002
-projection_length = 421 # from 1880 to 2300
+hindcast_length=122 # there are 122 years from 1880 to 2002
+projection_length=421 # from 1880 to 2300
 
 #----------------------------- Step 2: Calibrate and Project Sea-level Rise ------------------------
 #------------------------------ Find Initial Parameter & Initial Hindcast ------------------------
@@ -134,7 +134,7 @@ iter=1000  # specify number of iterations
 outDEoptim <- DEoptim(min_res, lower, upper, 
                       DEoptim.control(itermax=iter,
                                       trace=FALSE))
-print(outDEoptim$optim$bestmem)# find best initial parameters
+print(outDEoptim$optim$bestmem) # print best initial parameters
 parms = c(outDEoptim$optim$bestmem[1], outDEoptim$optim$bestmem[2], outDEoptim$optim$bestmem[3])
 
 # Run the model with the initial parameters to create a simulation of the observations
@@ -170,12 +170,12 @@ bound.lower = c(0, -3, err_neg[1], 0, -0.99)
 bound.upper = c(2,  2, err_pos[1], 1,  0.99)
 
 # Set the measurement errors for heteroskedastic assumption.
-y.meas.err = err.obs 
+y.meas.err = err.obs
 
 # Name the model parameters and specify the number of model parameters.
 # Sigma and rho are statistical parameters and are not counted in the number.
 model.p=3
-parnames=c("alpha","base temp","initialvalue", "sigma.y", “rho.y”)
+parnames=c("alpha","base temp","initialvalue", "sigma.y", "rho.y")
 
 # Load the likelihood model assuming correlated residuals.
 source("SLR_scripts/Obs_likelihood_AR.R")
@@ -193,7 +193,7 @@ step = c(0.02, 0.02, 0.1, 0.01, 0.01)
 NI = 2.5e7 # number of iterations
 burnin = seq(1,0.01*NI,1) # 1% burnin
 
-# Run the MCMC calibration
+# Run MCMC calibration.
 mcmc.out1 = metrop(log.post, p0, nbatch=NI, scale=step)
 prechain1 = mcmc.out1$batch
 
@@ -211,7 +211,7 @@ h = length(ssprechain1[,1]) #length of the subset ~20,000
 median.slr.par = c(median(prechain1[-burnin,1]), median(prechain1[-burnin,2]), median(prechain1[-burnin,3]))
 
 # Estimate model projection from parameter medians.
-to = projection_length #421 
+to = projection_length #421
 median.slr.proj = rahmfunction(median.slr.par, rcp85) 
 
 #------------- Hindcast Sea-level Rise with Uncertainty & Find Plausible Parameters ------------------
@@ -279,18 +279,18 @@ for(n in 1:h) {
 }
 
 # Estimate the residuals with the AR(1) coefficient (ssprechain1[n,5]) and sigma (ssprechain1[n,4]).
-res.mcmc_proj = mat.or.vec(h, nyears.mod) #(nr,nc)
+res.mcmc_proj=mat.or.vec(h, nyears.mod) #(nr,nc)
 for(n in 1:h) {
   for(i in 2:nyears.mod) {
     # Equation (3-4).
     res.mcmc_proj[n,i] = ssprechain1[n,5]*res.mcmc_proj[n,i-1] + 
-      rnorm(1, mean = 0, sd = ssprechain1[n,4])
+      rnorm(1,mean=0,sd=ssprechain1[n,4])
   }
 }
 # Estimate the hindcasts: add the residuals onto the model simulations, Equation (2) & (3).
-slr.mcmc_proj = res.mcmc_proj
+slr.mcmc_proj=res.mcmc_proj
 for(i in 1:h) {
-  slr.mcmc_proj[i,] = fit.mcmc_proj[i,]+res.mcmc_proj[i,]
+  slr.mcmc_proj[i,]=fit.mcmc_proj[i,]+res.mcmc_proj[i,]
 }
 
 #--------------------- Step 3: Recreate the Rahmstorf predictions: ----------------
@@ -343,7 +343,7 @@ pdf2100 <- density(prob_proj2100/100)
 # ACCOUNTING for dams and reservoirs.
 # The year 2100 is the 221 number in the sequence.
 proj2100DamsRes <- mat.or.vec(h,1)
-proj2100DamsRes <- (slr.mcmc_proj[,221]/100) + DamsReservoirs 
+proj2100DamsRes <- (slr.mcmc_proj[,221]/100) + DamsReservoirs
 pdf2100DamsRes <- density(proj2100DamsRes)
 
 # plot(pdf2100DamsRes, col="red")
