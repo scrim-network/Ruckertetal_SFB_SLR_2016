@@ -140,12 +140,12 @@ for(i in 1:length(prob_proj2100)){
 heb.probs <- apply(slr.storm.DR2100, 2, inv.sf, val=heberger09.2100[year100prob])
 
 # Check if probabilities are estimated for each state of the world
-# If so then the minimum SLR plus the maximum storm surge should be equal to or larger than
+# If so, then the minimum SLR plus the maximum storm surge should be equal to or larger than
 # the 100-yr Heberger 09 value
 print(heberger09.2100[year100prob])
 print(fit_q_year[100000]/100 + min(prob_proj2100/100))
 
-# If so all NAs produced have a probability smaller than 1:100,000.
+# If not, all NAs produced have a probability smaller than 1:100,000.
 # Set all NAs to 0 since they are smaller than 1:100,000. This gives us a conservative estimate,
 # but the difference/impact of doing so is minor. This effect was tested in the plotting script.
 # See for example supplementary figure 3.
@@ -164,15 +164,15 @@ remove(heb.probs)
 mean.slr.probs <- apply(slr.storm.DR2100, 2, inv.sf, val=mean.stormSLR.2100HET[year100prob])
 
 # Check if probabilities are estimated for each state of the world
-# If so then the minimum SLR plus the maximum storm surge should be equal to or larger than
+# If so, then the minimum SLR plus the maximum storm surge should be equal to or larger than
 # the 100-yr mean SLR + storm surge value
 print(mean.stormSLR.2100HET[year100prob])
 print(fit_q_year[storm_surgeL]/100 + min(prob_proj2100/100))
 
-# If so all NAs produced have a probability smaller than 1:100,000.
+# If not, all NAs produced have a probability smaller than 1:100,000.
 # Set all NAs to 0 since they are smaller than 1:100,000. This gives us a conservative estimate,
 # but the difference/impact of doing so is minor. This effect was tested in the plotting script.
-# See for example supplementary figure 2.
+# See for example supplementary figure 3.
 write.csv(mean.slr.probs,"Workspace/NewMeanProbabilities_norm.csv",na="0")
 mean.probs.table <- read.csv("Workspace/NewMeanProbabilities_norm.csv")
 new.mean.probs = mean.probs.table[,2]
@@ -188,12 +188,12 @@ remove(mean.slr.probs)
 quant90.slr.probs <- apply(slr.storm.DR2100, 2, inv.sf, val=quant90.stormSLR.2100HET[year100prob])
 
 # Check if probabilities are estimated for each state of the world
-# If so then the minimum SLR plus the maximum storm surge should be equal to or larger than
+# If so, then the minimum SLR plus the maximum storm surge should be equal to or larger than
 # the 100-yr 90%  SLR + storm surge value
 print(quant90.stormSLR.2100HET[year100prob])
 print(fit_q_year[storm_surgeL]/100 + min(prob_proj2100/100))
 
-# If so all NAs produced have a probability smaller than 1:100,000.
+# If not, all NAs produced have a probability smaller than 1:100,000.
 # Set all NAs to 0 since they are smaller than 1:100,000. This gives us a conservative estimate,
 # but the difference/impact of doing so is minor. This effect was tested in the plotting script.
 # See for example supplementary figure 2.
@@ -212,14 +212,14 @@ remove(quant90.slr.probs)
 nw.storm.slr.probs <- apply(slr.storm.DR2100, 2, inv.sf, val= fit_q_year[year100prob]/100)
 
 # Check if probabilities are estimated for each state of the world
-# If so then the minimum SLR plus the maximum storm surge should be equal to or larger than
+# If so, then the minimum SLR plus the maximum storm surge should be equal to or larger than
 # the 100-yr storm surge value
 print(fit_q_year[year100prob]/100)
 print(fit_q_year[storm_surgeL]/100 + min(prob_proj2100/100))
 
 which(nw.storm.slr.probs == 'is.na') # integer(0) when no NAs
 
-# If so all NAs produced have a probability smaller than 1:100,000.
+# If not, all NAs produced have a probability smaller than 1:100,000.
 # Set all NAs to 0 since they are smaller than 1:100,000. This gives us a conservative estimate.
 write.csv(nw.storm.slr.probs,"Workspace/NewStormProbabilities_norm.csv") #,na="0")
 storm.probs.table <- read.csv("Workspace/NewStormProbabilities_norm.csv")
@@ -243,6 +243,12 @@ num.range2 = seq(end.num+0.1, max.pot.num, length.out=80)
 num.range = c(num.range1, num.range2)
 
 # num.range = seq(small.num, max.pot.num, length.out=200)
+
+# Test: The first number in num.range must be larger than the minimum value in each flood frequency curve
+# That way all NAs produced have a frequency smaller than 1:100,000.
+print(num.range[1])
+print(all(slr.storm.DR2100[1,] == min(slr.storm.DR2100)))
+print(min(slr.storm.DR2100))
 
 # Find the probabilities of the values in the range using all the potential storm surge plus SLR anomalies
 new.probs <- mat.or.vec(length(slr.storm.DR2100[1,]), length(num.range))
