@@ -46,7 +46,7 @@ matrix_dem[matrix_dem > 8] <- NA
 # Plot the elevation cdf as a hypospectic plot. To create the figure in the paper
 # this figure will have to be rotated, text and colors need to be added, and the subset
 # figure will have to be added in the corner. All of this can be done in powerpoint, gimp, and etc.
-png(file="Figures/sanfran_subset2.tiff", family="Times", units="in", width=8, height=8, pointsize=11, res=300)
+png(file="Figures/Fig4.tiff", family="Times", units="in", width=8, height=8, pointsize=11, res=300)
 plot.ecdf(matrix_dem, ylab="", xlab="", main="")
 abline(v = 0, lty=2)
 abline(v = 1.59, lty=2, col=myheatcolors[3])
@@ -55,10 +55,10 @@ abline(v = 2.72, lty=2, col=myheatcolors[9])
 axis(side=3, labels=TRUE)
 dev.off()
 
-# Estimate and print the fraction of land suspetible to the following water levels.
+# Estimate and print the fraction of land susceptible to the following water levels.
 func = ecdf(matrix_dem)
-print(paste("Fraction of land suspetible to 1.59 m: ", round(func(1.59),2)))
-print(paste("Fraction of land suspetible to 2.21 m: ", round(func(2.21),2)))
-print(paste("Fraction of land suspetible to 2.72 m: ", round(func(2.72),2)))
+print(paste("Fraction of land susceptible to 1.59 m: ", round(func(1.59),2)))
+print(paste("Fraction of land susceptible to 2.21 m: ", round(func(2.21),2)))
+print(paste("Fraction of land susceptible to 2.72 m: ", round(func(2.72),2)))
 
 #################################### END #######################################
