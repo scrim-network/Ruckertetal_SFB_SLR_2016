@@ -78,7 +78,7 @@ annual.res$date <- as.year(data$date2)
 annual.res$residual <- annual.res$sl - annual.res$coredata.year.mean.   # Residuals of Annual Means
 annual.res$date.time <- data$date.time   # Unique index for residuals
 
-# Create zoo obhect for residuals and aggregate block maximas
+# Create zoo object for residuals and aggregate block maximas
 # year.res.zoo are 'detrended' sea levels
 year.res.zoo <- zoo(annual.res$residual, order.by = annual.res$date.time)
 year.res.max <- aggregate(year.res.zoo, as.year, max)
