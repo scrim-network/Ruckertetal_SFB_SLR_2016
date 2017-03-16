@@ -43,7 +43,7 @@ enableJIT(3)
 enableJIT(3)
 
 #------------------- Source in scripts -------------------------------------
-source("../Scripts/inv_sf.r")
+source("Scripts/inv_sf.r")
 
 #------------------- Load in the San Francisco tide & sea-level rise workspaces 
 # San Francisco tides
@@ -174,6 +174,12 @@ max.pot.num2020 = round(max.pot.num2020, 1)
 num.range22020 = seq(end.num2020+0.02, max.pot.num2020, length.out=80)
 num.range2020 = c(num.range12020, num.range22020)
 
+# Test: The first number in num.range must be larger than the minimum value in each flood frequency curve
+# That way all NAs produced have a frequency smaller than 1:100,000.
+print(num.range2020[1])
+#print(all(slr.storm.2020[1,] == min(slr.storm.2020)))
+print(min(slr.storm.2020))
+
 # Find the probabilities of the values in the range using all the potential storm surge plus SLR anomalies
 new.probs2020 <- mat.or.vec(length(slr.storm.2020[1,]), length(num.range2020))
 for(i in 1:length(num.range2020)){
@@ -225,6 +231,12 @@ max.pot.num2050 = round(max.pot.num2050, 1)
 num.range22050 = seq(end.num2050+0.05, max.pot.num2050, length.out=80)
 num.range2050 = c(num.range12050, num.range22050)
 
+# Test: The first number in num.range must be larger than the minimum value in each flood frequency curve
+# That way all NAs produced have a frequency smaller than 1:100,000.
+print(num.range2050[1])
+#print(all(slr.storm.2050[1,] == min(slr.storm.2050)))
+print(min(slr.storm.2050))
+
 # Find the probabilities of the values in the range using all the potential storm surge plus SLR anomalies
 new.probs2050 <- mat.or.vec(length(slr.storm.2050[1,]), length(num.range2050))
 for(i in 1:length(num.range2050)){
@@ -275,6 +287,12 @@ max.pot.num2080 = round(max.pot.num2080, 1)
 num.range22080 = seq(end.num2080+0.05, max.pot.num2080, length.out=80)
 num.range2080 = c(num.range12080, num.range22080)
 
+# Test: The first number in num.range must be larger than the minimum value in each flood frequency curve
+# That way all NAs produced have a frequency smaller than 1:100,000.
+print(num.range2080[1])
+#print(all(slr.storm.2080[1,] == min(slr.storm.2080)))
+print(min(slr.storm.2080))
+
 # Find the probabilities of the values in the range using all the potential storm surge plus SLR anomalies
 new.probs2080 <- mat.or.vec(length(slr.storm.2080[1,]), length(num.range2080))
 for(i in 1:length(num.range2080)){
@@ -321,6 +339,12 @@ write.csv(accountUNC_2080,"ShinyApp/Data/StormFreqAccountUNC2080.csv")
 # max.pot.num = round(max.pot.num, 1)
 # num.range2 = seq(end.num+0.1, max.pot.num, length.out=80)
 # num.range = c(num.range1, num.range2)
+# 
+# Test: The first number in num.range must be larger than the minimum value in each flood frequency curve
+# That way all NAs produced have a frequency smaller than 1:100,000.
+# print(num.range2020[1])
+# print(all(slr.storm.2100[1,] == min(slr.storm.2100)))
+# print(min(slr.storm.2100))
 # 
 # # Find the probabilities of the values in the range using all the potential storm surge plus SLR anomalies
 # new.probs <- mat.or.vec(length(slr.storm.2100[1,]), length(num.range))
