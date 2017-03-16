@@ -49,9 +49,9 @@ ui <- fluidPage(
   br(),
   fluidRow(
     column(12,
-           h1("Future Storm Probability Tutorial"),
+           h1("Future Flood Height Probability Tutorial"),
            h3('Introduction', style="font-style: italic"),
-           p("Predicting future storm surge for a particular area is a difficult task for decision-makers for several reasons. 
+           p("Predicting future flood height (storm surge including sea-level rise) for a particular area is a difficult task for decision-makers for several reasons. 
              First, not all regions have extensive tide data. Second, future changes in sea level are deeply uncertain, especially 
              at the local level, so the choice of how to represent future sea-level rise is a difficult, yet important issue. For 
              example, overestimating future sea-level rise could lead to unnecessary high costs for protection measures, whereas 
@@ -61,14 +61,14 @@ ui <- fluidPage(
               associated probability of occurence using San Francisco, California 
               as an example. More importantly, this tutorial illustrates how accounting for uncertainty in sea-level 
               projections increases the return level (the value associated with a probability of occurrence) 
-              compared to accounting the mean sea-level projection."),
+              compared to accounting for the mean sea-level projection."),
            h3('Directions', style="font-style: italic"),
            p("In this tutorial, you will determine (Step #1) what year to re-evaluate the flood probability in San Francisco by clicking on one of the button choices.  
              Next, in Step #2 you can choose how much sea-level rise to account for in that year by moving the slider. In Step #3, you can choose to 
              compare the future flood probability calculated from your choices to (i) nothing, (ii) the future flood probability accounting for the mean sea-level 
              anomaly, and to (iii) the future flood probability accounting for uncertainty in future sea-level rise. When you're satisfied with your choices, 
-             click the 'Calculate storm surge!' button. This action will cause the application to calculate the future flood probability using your choices in 
-             Step #1 and #2, generate a flood probability plot, and generate a table for comparison to the choice made in Step #3. The 'Calculate storm surge!' button, 
+             click the 'Calculate flood height!' button. This action will cause the application to calculate the future flood probability using your choices in 
+             Step #1 and #2, generate a flood probability plot, and generate a table for comparison to the choice made in Step #3. The 'Calculate flood height!' button, 
              only needs to be clicked on once. Afterwards, the flood probability plot and table will be modified automatically using the options in the three steps."),
            wellPanel(style = "background-color: #FFFFFF;",
            helpText("Please consider sending feedback to: ", tags$b("klr324@psu.edu."), " This helps us tremendously  
@@ -129,16 +129,16 @@ ui <- fluidPage(
                        value = 0, min = 0, max = 2.5, step = 0.01)
            ),
     column(4,
-           h3("Step #3: Compare future storm probability"),
-           helpText("Do you want to compare your estimated future storm surge (current storm surge + the accounted future sea-level rise) 
-                    to the current storm surge plus the mean sea-level estimate or the current storm surge plus accounting 
+           h3("Step #3: Compare future flood height probability"),
+           helpText("Do you want to compare your estimated future flood height (baseline storm surge + the accounted future sea-level rise) 
+                    to the flood height accounting for the mean sea-level estimate or the flood height accounting 
                     for uncterain sea-level rise?"),
            radioButtons("add_line", "Compare:",
                         c("None" = "no_lines",
                           "Mean sea level" = "my_mean",
                           "Account for uncertain sea level" = "account_unc"),
                         selected = "no_lines"),
-           actionButton("submitstep3", "Calculate storm surge!")
+           actionButton("submitstep3", "Calculate flood height!")
            )
 
   ),
@@ -164,13 +164,13 @@ ui <- fluidPage(
     column(6,
            plotOutput("survf", height=500),
            br(),
-           p("Above is the survival function displaying the storm surge flood probability for San Francisco. The current flood probability is 
+           p("Above is the survival function displaying the flood height probability for San Francisco. The baseline flood probability is 
              shown as the light blue line, the historical observations are black dots, and the gray envelope is the 99% credible interval 
-             of the current storm surge plus the future sea-level rise. The 99% credible interval is shown as a gradient from more likely 
-             in gray to less likely in white. The yellow line is the user's predicted future storm surge flood probability. This is estimated 
-             by adding the sea-level anomaly specified in Step #2 to the current flood probability. The 
-             blue line and the dark blue line is the current storm surge + the mean sea-level and the current storm surge with accounting 
-             for sea-level rise uncertainty, respectively.")
+             of the baseline storm surge plus the future sea-level rise. The 99% credible interval is shown as a gradient from more likely 
+             in gray to less likely in white. The yellow line is the user's predicted future flood height probability. This is estimated 
+             by adding the sea-level anomaly specified in Step #2 to the baseline flood probability. The 
+             blue line and the dark blue line is the flood height accounting for the mean sea-level and the flood height accounting 
+             sea-level rise uncertainty, respectively.")
   ),
   fluidRow(
     column(12,
@@ -361,7 +361,7 @@ output$comparison.table <- renderTable({
 
     m <- matrix(c(user[1], compare[1], user[2], compare[2], user[3], compare[3], user[4], compare[4], user[5], compare[5]), nrow=2, ncol=5)
     rownames(m) <- c("User", "Mean")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
                      "Increase over user estimated return level (m)", "Increase over user estimated return level (%)")
     m
 
@@ -373,7 +373,7 @@ output$comparison.table <- renderTable({
 
     m <- matrix(c(user[1], compare[1], user[2], compare[2], user[3], compare[3], user[4], compare[4], user[5], compare[5]), nrow=2, ncol=5)
     rownames(m) <- c("User", "Uncertainty")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
                      "Increase over user estimated return level (m)", "Increase over user estimated return level (%)")
     m
 
@@ -385,7 +385,7 @@ output$comparison.table <- renderTable({
 
     m <- matrix(c(user[1], compare[1], user[2], compare[2], user[3], compare[3], user[4], compare[4], user[5], compare[5]), nrow=2, ncol=5)
     rownames(m) <- c("User", "Uncertainty")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
                      "Increase over user estimated return level (m)", "Increase over user estimated return level (%)")
     m
 
@@ -397,7 +397,7 @@ output$comparison.table <- renderTable({
 
     m <- matrix(c(user[1], compare[1], user[2], compare[2], user[3], compare[3], user[4], compare[4], user[5], compare[5]), nrow=2, ncol=5)
     rownames(m) <- c("User", "Uncertainty")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
                      "Increase over user estimated return level (m)", "Increase over user estimated return level (%)")
     m
 
@@ -409,13 +409,13 @@ output$comparison.table <- renderTable({
 
     m <- matrix(c(user[1], compare[1], user[2], compare[2], user[3], compare[3], user[4], compare[4], user[5], compare[5]), nrow=2, ncol=5)
     rownames(m) <- c("User", "Uncertainty")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)",
                      "Increase over user estimated return level (m)", "Increase over user estimated return level (%)")
     m
   } else {
     m <- matrix(c(round(flood_meters[year100prob],2), input$num, round(slr.plotted[year100prob],2)), nrow=1, ncol=3)
     rownames(m) <- c("User")
-    colnames(m) <- c("Current 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)")
+    colnames(m) <- c("Baseline 100-yr storm surge (m)", "Sea-level anomaly (m)", "Estimated 100-yr return level (m)")
     m
   }
   })
