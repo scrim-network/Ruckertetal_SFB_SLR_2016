@@ -118,8 +118,8 @@ for(i in 1:length(lognorm_dist_2100)){
 #------------------- Pareto distribution ---------------
 # pareto r script (written by Yawen Guan)
 
-# b is the lower cuttoff of the distribution. saying smaller values than b
-# is not allowed. From optim , the cutoff is set to 0.4743678.
+# b is the lower cutoff of the distribution. saying smaller values than b
+# is not allowed. From optim, the cutoff is set to 0.4743678.
 # a is the shape parameter.
 
 library(DEoptim)
