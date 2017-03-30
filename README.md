@@ -1,9 +1,9 @@
 # Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay
 
-README file last updated by Kelsey Ruckert, klr324-at-psu-dot-edu, Thurs March 16 2017
+README file last updated by Kelsey Ruckert, klr324-at-psu-dot-edu, Thurs March 30 2017
 
 ## Citation
->Ruckert, KL, Oddo, PC, and Keller, K. Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, *2017*.
+>Ruckert, KL, Oddo, PC, and Keller, K (2017). Impacts of representing sea-level rise uncertainty on future flood risks: An example from San Francisco Bay, PLoS ONE 12(3): e0174666. doi: <a href="http://dx.doi.org/10.1371%2Fjournal.pone.0174666" target="_blank">10.1371/journal.pone.0174666</a>.
 
 ## Overview
 This code uses "*a case study to quantify and illustrate how neglecting sea-level rise uncertainties can bias risk projections.*" The case study focuses on the future 100-year flood height in the year 2100 in the San Francisco Bay area. Accounting for the uncertainties associated with future sea-level rise is important because it "*can have considerable impacts on the design of flood risk management strategies.*"
