@@ -75,8 +75,9 @@ ui <- fluidPage(
              with improving the tutorial and our future tutorials.",
              style="font-style: italic; text-align: center"),
            
-           helpText('The source code will be avaliable on ', a(href="https://github.com/scrim-network/Ruckertetal_SFB_SLR_2016", "Github", 
-                                                                  target="_blank"), ' upon publication of Ruckert et al. (in review).',
+           helpText('The source code is avaliable on ', a(href="https://github.com/scrim-network/Ruckertetal_SFB_SLR_2016", "Github", 
+                                                                  target="_blank"), '  along with the code for the associated paper, ', 
+                    a(href="http://dx.doi.org/10.1371%2Fjournal.pone.0174666", "Ruckert et al. (2017)", target="_blank"), '.',
            style="font-style: italic; text-align: center")
            ),
            hr()
@@ -192,7 +193,8 @@ ui <- fluidPage(
   ),
   fluidRow(
     column(12,
-           p("[Figures and text modified from Ruckert et al. (in review).]", style="font-style: italic; text-align: center"),
+           p('[Figures and text modified from ', a(href="http://dx.doi.org/10.1371%2Fjournal.pone.0174666", "Ruckert et al. (2017)", target="_blank"), '.]', 
+             style="font-style: italic; text-align: center"),
            h6('Shiny app developed by Kelsey Ruckert. Penn State University: klr324@psu.edu.', style="font-style: italic; text-align: center"),
            helpText('Note: this illustrative tutorial is not to be used to assess actual coastal hazards.', style="font-style: italic; text-align: center"),
            hr()
