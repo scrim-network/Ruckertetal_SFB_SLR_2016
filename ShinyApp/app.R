@@ -351,7 +351,7 @@ return period", cex=1.1)
   }
 #   Table
 # #================
-output$comparison.table <- renderTable({
+output$comparison.table <- renderTable(rownames = TRUE, {
 
   user = c(round(flood_meters[year100prob],2), input$num, round(slr.plotted[year100prob],2), "-", "-")
 
